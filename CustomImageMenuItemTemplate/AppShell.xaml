@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MyMAUIApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MyMAUIApp"
+    Shell.FlyoutBehavior="Locked"
+    FlyoutBackgroundColor="Black"
+    Shell.BackgroundColor="Black"
+    FlyoutWidth="80">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="IconTemplate" x:DataType="FlyoutItem">
+                <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto"
+                      Padding="3,0,2,0"
+                      WidthRequest="{Binding FlyoutWidth, Source={x:Reference Shell}}" 
+                      HeightRequest="75">
+                    <Image Grid.Column="0" Grid.Row="0"
+                           Source="{Binding Icon}"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           Margin="0,12,0,0">
+                    </Image>
+                    <Label Grid.Column="0" Grid.Row="1"
+                           Margin="0,-3,0,0"
+                           Text="{Binding Title}"
+                           TextColor="White"
+                           FontSize="12"
+                           HorizontalOptions="Center"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="MenuItemTemplate" x:DataType="MenuItem">
+                <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto"
+                      Padding="3,0,2,0"
+                      WidthRequest="{Binding FlyoutWidth, Source={x:Reference Shell}}" 
+                      HeightRequest="75">
+                    <Image Grid.Column="0" Grid.Row="0"
+                           Source="{Binding IconImageSource}"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           Margin="0,12,0,0" />
+                    <Label Grid.Column="0" Grid.Row="1"
+                           Margin="0,-3,0,0"
+                           Text="{Binding Text}"
+                           TextColor="White"
+                           FontSize="12"
+                           HorizontalOptions="Center"/>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <MenuItem Text="Text" IconImageSource="service.png" Shell.MenuItemTemplate="{StaticResource MenuItemTemplate}" />
+    <FlyoutItem Title="Title" Icon="service.png" Shell.ItemTemplate="{StaticResource IconTemplate}">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+    </FlyoutItem>
+
+
+</Shell>
+
